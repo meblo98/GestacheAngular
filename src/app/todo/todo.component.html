@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestion de tache</title>
+</head>
+<body>
+  <div class="to-do-list">
+    <div class="container d-flex justify-content-center align-items-center p-5">
+      <div class="to-do-list-body position-relative d-flex flex-column bg-white rounded-5">
+        <div class="dots position-absolute overflow-hidden">
+          <div class="dot"></div>
+        </div>
+        <div class="to-do-list-header"></div>
+        <div class="to-do-list-tasks p-5">
+          <div class="title text-center">
+            <h1 class="fw-bold">To-do list</h1>
+            <p id="tasksInfo" class="fw-bold"></p>
+          </div>
+          <div class="input-group mb-3">
+            <input
+              id="taskInput"
+              type="text"
+              class="form-control"
+              placeholder="titre de la tache ..."
+              aria-label="Add your task"
+              aria-describedby="button-addon2"
+              [(ngModel)]="newTask.title"
+            /><textarea
+              id="description"
+              type="text"
+              class="form-control"
+              placeholder="votre description..."
+              aria-label="Add your task"
+              aria-describedby="button-addon2"
+              [(ngModel)]="newTask.description"
+            ></textarea>
+            <button class="btn btn-outline-secondary" type="button" (click)="addTask()">
+              <i class="fa-solid fa-pencil"></i>
+            </button>
+          </div>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Num</th>
+                <th class="w-50">Taches</th>
+                <th class="w-50">Description</th>
+                <th>Statut</th>
+                <th>Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let task of tasks; let i = index">
+                <th>{{ i + 1 }}</th>
+                <th>{{ task.title }}</th>
+                <th>{{ task.description }}</th>
+                <th>
+                  <i (click)="checked(task)" [ngClass]="{'fa-regular fa-square-check': !task.completed, 'fa-solid fa-square-check': task.completed}"></i>
+                </th>
+                <th><i (click)="deleteTask(i)" class="fa-solid fa-trash-can"></i></th>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+</body>
+</html>
