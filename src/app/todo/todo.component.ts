@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
@@ -14,7 +14,7 @@ interface Task {
   standalone: true,
   imports: [FormsModule, CommonModule],
   templateUrl: './todo.component.html',
-  styleUrls: ['./todo.component.css']
+  styleUrls: ['./todo.component.css'],
 })
 export class TodoComponent implements OnInit {
   tasks: Task[] = [];
@@ -25,8 +25,6 @@ export class TodoComponent implements OnInit {
   ngOnInit(): void {
     this.getTasksLength();
   }
-
-
 
   addTask(): void {
     if (this.newTask.title && this.newTask.description) {
@@ -44,13 +42,19 @@ export class TodoComponent implements OnInit {
     this.getTasksLength();
   }
 
-  checked(task: Task): void {
-    task.completed = !task.completed;
+  @Input() todo: any;
+  @Input() checked: boolean = false;
+
+  toggleCheck(index: number): void {
+    this.tasks[index].completed = !this.tasks[index].completed;
     this.getTasksLength();
   }
 
   getTasksLength(): void {
-    const completedTasks = this.tasks.filter(task => task.completed);
-    this.tasksInfo = `${this.tasks.length} Total, ${completedTasks.length} Complete, ${this.tasks.length - completedTasks.length} En attente`;
+    const completedTasks = this.tasks.filter((task) => task.completed);
+    this.tasksInfo = `${this.tasks.length} Total, ${
+      completedTasks.length
+    } Complete,
+     ${this.tasks.length - completedTasks.length} En attente`;
   }
 }
