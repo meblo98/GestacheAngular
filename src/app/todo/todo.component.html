@@ -47,21 +47,18 @@
               <tr>
                 <th>Num</th>
                 <th class="w-50">Taches</th>
-                <th class="w-50">Description</th>
+                <th class="w-50 h-50">Description</th>
                 <th>Statut</th>
                 <th>Delete</th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let task of tasks; let i = index" id="tache">
-                <th>{{ i + 1 }}</th>
-                <th >{{ task.title }}</th>
-                <th>{{ task.description }}</th>
+                <th [ngClass]="{ 'line-through': task.completed }">{{ i + 1 }}</th>
+                <th [ngClass]="{ 'line-through': task.completed }">{{ task.title }}</th>
+                <th [ngClass]="{ 'line-through': task.completed }">{{ task.description }}</th>
                 <th>
-                  <div [ngClass]="{ 'checked': checked }">
-                    <input type="checkbox" [checked]="checked" (change)="toggleCheck()">
-                    <span>{{ todo }}</span>
-                  </div>
+                  <input type="checkbox" [checked]="task.completed" (change)="toggleCheck(i)">
                 </th>
                 <th><i (click)="deleteTask(i)" class="fa-solid fa-trash-can"></i></th>
               </tr>
