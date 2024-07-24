@@ -17,8 +17,8 @@
         <div class="to-do-list-header"></div>
         <div class="to-do-list-tasks p-5">
           <div class="title text-center">
-            <h1 class="fw-bold">To-do list</h1>
-            <p id="tasksInfo" class="fw-bold"></p>
+            <h1 class="fw-bold">To-do list 💕 </h1>
+            <p id="tasksInfo" class="fw-bold">{{ tasksInfo }}</p>
           </div>
           <div class="input-group mb-3">
             <input
@@ -53,12 +53,15 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let task of tasks; let i = index">
+              <tr *ngFor="let task of tasks; let i = index" id="tache">
                 <th>{{ i + 1 }}</th>
-                <th>{{ task.title }}</th>
+                <th >{{ task.title }}</th>
                 <th>{{ task.description }}</th>
                 <th>
-                  <i (click)="checked(task)" [ngClass]="{'fa-regular fa-square-check': !task.completed, 'fa-solid fa-square-check': task.completed}"></i>
+                  <div [ngClass]="{ 'checked': checked }">
+                    <input type="checkbox" [checked]="checked" (change)="toggleCheck()">
+                    <span>{{ todo }}</span>
+                  </div>
                 </th>
                 <th><i (click)="deleteTask(i)" class="fa-solid fa-trash-can"></i></th>
               </tr>
